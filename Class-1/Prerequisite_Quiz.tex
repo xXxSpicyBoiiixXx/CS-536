@@ -1,0 +1,85 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{Prerequisite Quiz}
+\author{Md Ali \\ 
+CS 536: Science of Programming} 
+\date{January 17, 2021}
+
+\maketitle
+ 
+\begin{exercise}{1}
+Are $2+2$ and $4$ syntactically equal and why?
+\end{exercise} 
+
+\begin{proof}
+No, this is due to the operator expression aren't constant. Ultimately, making them not syntactically equal. 
+
+\end{proof}
+
+\begin{exercise}{2}
+If AND higher precedence than OR and OR is left associative, how do you parenthesize V AND W OR X OR Y?
+\end{exercise}
+ 
+\begin{proof}
+The following is the parenthesized version. ((V AND W) OR X) OR Y
+
+\end{proof}
+
+\begin{exercise}{3}
+If $p$ and $q$ are propositions then what are the contrapositive, converse, and inverse of the implication $p \rightarrow q$ and how are they related? 
+\end{exercise}
+
+\begin{proof}
+An implication and its contrapositive are semantically equivalent. This is the same as the converse and inverse, where they are also semantically equivalent. The converse and the implication are not semantically equivalent. The following are contrapositive, converse, and inverse of the previous implication. 
+\begin{align*}
+    \text{Contrapositive}: \neg\; q \rightarrow \neg\; p \\
+    \text{Converse}: q \rightarrow p \\ 
+    \text{Inverse}: \neg\; p \rightarrow \neg\; q 
+\end{align*}
+
+\end{proof}
+ 
+\begin{exercise}{4}
+How do you pronounce ($\neg \forall\; x \in \mathbb{Z}.$ $\exists\; y \in \mathbb{Z}.$ $y^{2} < x$) in English, and is it true?
+\end{exercise}
+
+\begin{proof}
+It's not the case that for every integer x, there exists an integer y such that y squared is less than x. This is proven true when x = 0, as any integer squared can't be less than 0, hence result.  
+
+\end{proof}
+
+\begin{exercise}{5}
+What's the difference between saying that a predicate $p$ is true versus saying that you have mechanically checkable proof of $p$?
+\end{exercise}
+
+\begin{proof} 
+Stating that the predicate $p$ is true is a semantic claim where as stating that there is a proof of $p$ is a syntactical claim.
+
+\end{proof}
+
+
+
+\end{document}
