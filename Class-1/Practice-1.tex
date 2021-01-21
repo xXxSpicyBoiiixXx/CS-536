@@ -1,0 +1,369 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{Practice 1}
+\author{Md Ali \\ 
+CS 536: Science of Programming} 
+\date{January 18, 2021}
+
+\maketitle
+ 
+\begin{exercise}{1}
+What is program verification? How is it done?
+\end{exercise} 
+
+\begin{proof}
+Program verification is the process of getting reliable programs by discerning properties about programs. In a sense we reason about programs as we write them. Here we will need both testing of programs and reasoning about programs. Within testing, we run a program and verify that it behaves correctly while in verification, we reason about a program to predict that it will behave correctly. 
+
+\end{proof}
+
+\begin{exercise}{2}
+How is type-checking a form of program verification? 
+\end{exercise}
+ 
+\begin{proof}
+Type-checking is a form of program verification in the sense that the analyzing of a program textually to reason about how it uses types, to check for type correctness. 
+
+\end{proof}
+
+\begin{exercise}{3}
+What is propositional logic? What are propositional connectives?
+\end{exercise}
+
+\begin{proof}
+Propositional logic is logic over proposition variables, which are variables containing either the variables true or false. In computer science, propositional logic is the logic used for Boolean expressions true or false, which are Boolean constants. \\ \\
+Propositional connectives have the logical connectives and ($\land$), or ($\lor$), not ($\neg$), implication ($\rightarrow$), and biconditional ($\leftrightarrow$) operating over variables that have true or false as their values. In computer science, the connections are Boolean operators. 
+
+\end{proof}
+ 
+\begin{exercise}{4}
+Given values for $p$ and $q$, what are the values of $p \land q$, $p \lor q$, etc? 
+\end{exercise}
+
+\begin{proof}
+The following are the different ways to exclaim the values and their definitions. \\ \\
+$p \land q$ is the conjunction or logical and of $p$ and $q$. Where $p$ and $q$ are said to be conjuncts of $p \land q$. \\ \\
+$p \lor q$ is the disjunction or logical or of $p$ and $q$. Where $p$ and $q$ are said to be disjuncts of $p \lor q$. \\ \\ 
+$p \rightarrow q$ is the implication or conditional of $p$ and $q$. Where $p$ is said to be the antecedent or hypothesis and $q$ is said to be the consequent or conclusion. \\ \\
+$p \leftrightarrow q$ is the equivalence or biconditional of $p$ and $q$. Where $p$ is said to be the antecedent or hypothesis and $q$ is said to be the consequent or conclusion. 
+
+\end{proof}
+
+\begin{exercise}{5}
+Translate each of the following to either $p \rightarrow q$ or $q \rightarrow p$: \\ \\
+a. if $p$ then $q$ \\ 
+b. $p$ is sufficient for $q$ \\
+c. $p$ only if $q$ \\ 
+d. $p$ is necessary for $q$ \\ 
+e. $p$ if $q$ \\ 
+f. if $q$ then $p$
+\end{exercise}
+
+\begin{proof} 
+From the questions, the following are the distinction of each part with their respect math notation. \\ \\ 
+a. $p \rightarrow q$ \\ 
+b. $p \rightarrow q$ \\
+c. $p \rightarrow q$ \\
+d. $q \rightarrow p$ \\
+e. $q \rightarrow p$ \\
+f. $q \rightarrow p$
+
+\end{proof}
+
+\begin{exercise}{6}
+What are the converse, contrapositive, and inverse of $p \rightarrow q$? How are they related? 
+\end{exercise}
+
+\begin{proof}
+An implication and its contrapositive are semantically equivalent. This is the same as the converse and inverse, where they are also semantically equivalent. The converse and the implication are not semantically equivalent. The following are contrapositive, converse, and inverse of the previous implication. 
+\begin{align*}
+    \text{Contrapositive}: \neg\; q \rightarrow \neg\; p \\
+    \text{Converse}: q \rightarrow p \\ 
+    \text{Inverse}: \neg\; p \rightarrow \neg\; q 
+\end{align*}
+\end{proof}
+
+\begin{exercise}{7}
+What is syntactic equality and how is it denoted?
+\end{exercise}
+
+\begin{proof}
+Syntactic equality is where two expressions or propositions are syntactically equal if they are textually identical. This is denoted by $\equiv$.
+
+\end{proof}
+
+\begin{exercise}{8}
+What is semantic equality? How do we indicate semantic equality of two arithmetic expressions? Two propositions? 
+\end{exercise}
+
+\begin{proof}
+Semantic equality is equality of meanings or results. For two arithmetic expressions we can utilize $=$ to indicate semantic equality. For two propositions we utilize $\Leftrightarrow$ to indicate semantic equality.
+
+\end{proof}
+
+\begin{exercise}{9}
+How are syntactic and semantic equality related?
+\end{exercise}
+
+\begin{proof}
+They are related in the since that syntactic equality implies semantic equality, meaning $\equiv\; \rightarrow\; =$. This also leads to the conclusion of $\not\equiv\; \rightarrow\; \neq$. It is important to note that semantic equality does not imply syntactic equality, meaning $=\; \nrightarrow\; \equiv$.
+
+\end{proof}
+
+\begin{exercise}{10}
+How do parentheses affect syntactic equality for us?
+\end{exercise}
+
+\begin{proof}
+Parentheses can affect syntactic equality but if we have either minimal parenthesization or full parenthesization than we can maintain syntactic equality. 
+
+\end{proof}
+
+\begin{exercise}{11}
+How do precedence and associativity rules relate to syntactic equality and to the notions of minimal and full parenthesization?
+\end{exercise}
+
+\begin{proof}
+With precedence we can maintain syntactic equality by removing unnecessary parenthesis depending on the operations. 
+\end{proof}
+
+\begin{exercise}{12}
+What are the minimal and full parenthesizations of \\ \\
+a. $( x + y \cdot (z/x) \cdot x ) - (y/z)$ \\ 
+b. $(\neg\; (p \land ((\neg\; q) \rightarrow r)) \lor (s \land (t \land v)) \rightarrow x$ \\ 
+c. $(p \leftrightarrow q) \land (q \leftrightarrow r)$ \\ 
+d. $(p \land q \land r) \lor (\neg\; p \land \neg\; q \land \neg\; r)$ \\ 
+\end{exercise}
+
+\begin{proof}
+Below is the answers to the above parts. \\ \\
+a. minimum: $x + yz - y/z$ \\ maximum: $(x +((y \cdot (z/x)) \cdot x)) - (y/z)$ \\ \\
+b. minimum: $\neg\; (p \land (\neg\; q \rightarrow r)) \lor (s \land (t \land v)) \rightarrow x$ \\ maximum: $(\neg\; (p \land ((\neg\; q) \rightarrow r)) \lor (s \land (t \land v))) \rightarrow x$\\ \\
+c. minimum: $(p \leftrightarrow q) \land (q \leftrightarrow r)$ \\ 
+maximum: $(p \leftrightarrow q) \land (q \leftrightarrow r)$ \\ \\
+d. minimum: $(p \land q \land r) \lor (\neg\; p \land \neg\; q \land \neg\; r)$ \\ 
+maximum: $(((p \land q) \land r)) \lor (((\neg\; p \land \neg\; q) \land \neg\; r))$
+
+\end{proof}
+
+\begin{exercise}{13}
+What are the precedence and associativity rules we are using for $+,\; -,\; *,\; /,\; \%,\; \leq,\; =,\; (etc.),\; \land,\; \lor,\; \rightarrow,\; \leftrightarrow,\; \text{and}\; \neg$
+\end{exercise}
+
+\begin{proof}
+For the most operations that we are doing we are utilizing left associative except for $\rightarrow$ and $\leftrightarrow$ are going to be using right assocaiative property. From here we will utilize PEMDAS for precedence which goes as parentheses, exponents, multiplication, division, addition, and subtraction. For the Boolean logic, we will use the following precedence $\neg,\; \land,\; \lor,\; \rightarrow,\; \leftrightarrow$
+
+\end{proof}
+
+\begin{exercise}{14}
+For propositions, what are the definitions of tautology, contradiction, and contingency? 
+\end{exercise}
+
+\begin{proof}
+Below are the definitions and their corresponding mathematically notions. \\ \\ 
+A tautology has a column of all true and is written as p is a tautology if $\models p$ \\ \\ 
+A contradiction has a column of all false and is written as p is a contradiction if $\models \neg\; p$ \\ \\ 
+Lastly, a contingency has a mix of true and false with at least one row true and at least one false.
+
+\end{proof}
+
+\begin{exercise}{15}
+Consider the six statements "p is a X" and "$\neg$ p is a X" where X ranges over "tautology", "contradiction", and "contingency". How are these statements related? 
+\end{exercise}
+
+\begin{proof} 
+Below is the six statements provided. Three of them are vice versa of each other. \\ \\
+If $p$ is a tautology, then $\neg\; p$ is a contradiction. \\
+If $\neg\; p$ is a tautology, then $p$ is a contradiction. \\
+If $p$ is a contradiction, then $\neg\; p$ is a tautology. \\ 
+If $\neg\; p$ is a contradiction, then $p$ is a tautology. \\ 
+If $p$ is a contingency, then $\neg\; p$ is also a contingency. \\ 
+If $\neg\; p$ is a contingency, then $p$ is also a contingency. 
+
+\end{proof}
+
+\begin{exercise}{16}
+Repeat the previous problem on the six statements "p is not a X" and "p is a X".
+\end{exercise}
+
+\begin{proof}
+Below is the six statements provided. Three of them are vice versa of each other. \\ \\
+If $p$ is not a tautology, then it is a contingency or a contradiction. \\
+If $p$ is not a contradiction, then it is a contingency or a tautology. \\
+If $p$ is not a contingency, then it is a tautology or a contradiction. \\
+If $p$ is a tautology, then it is not a contingency nor a contradiction. \\
+If $p$ is a contradiction, then it is not a contingency nor a tautology. \\
+If $p$ is a contingency, then it is not a tautology nor a contradiction.
+
+\end{proof}
+
+\begin{exercise}{17}
+Which of $p \rightarrow q \rightarrow r$, $p \rightarrow (q \rightarrow r)$, and $(p \rightarrow q) \rightarrow r$ are $=$? 
+\end{exercise}
+
+\begin{proof}
+$p \rightarrow q \rightarrow r = p \rightarrow (q \rightarrow r)$ due to $\rightarrow$ being right associative. If you write out the truth tables for each of these we can easily see that these two are exactly the same while $(p \rightarrow q) \rightarrow r$ would certainly be different. 
+
+\end{proof}
+
+\begin{exercise}{18}
+Write out truth tables for the following. Are any of these semantically equivalent? \\ \\
+a. $p \leftrightarrow (q \leftrightarrow r)$ \\
+b. $(p \leftrightarrow q) \land (q \leftrightarrow r)$ \\ 
+c. $(p \land q \land r) \lor (\neg\; p \land \neg\; q \land \neg\; r)$
+\end{exercise}
+
+\begin{proof}
+The truth tables of each function are below. There are semantically equivalency between the function in part b and c. \\ \\
+a. $p \leftrightarrow (q \leftrightarrow r)$
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+ \hline
+ $p$ & $q$ & $r$ & $p \leftrightarrow (q \leftrightarrow r)$\\ 
+ \hline
+ F & F & F & F \\ 
+ \hline 
+ F & F & T & T \\ 
+ \hline
+ F & T & F & T \\
+ \hline 
+ F & T & T & F \\ 
+ \hline 
+ T & F & F & T \\ 
+ \hline 
+ T & F & T & F \\ 
+ \hline 
+ T & T & F & F \\ 
+ \hline 
+ T & T & T & T \\ 
+ \hline 
+\end{tabular}
+\end{center}
+
+\newpage 
+
+b. $(p \leftrightarrow q) \land (q \leftrightarrow r)$
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+ \hline
+ $p$ & $q$ & $r$ & $(p \leftrightarrow q) \land (q \leftrightarrow r)$\\ 
+ \hline
+ F & F & F & T \\ 
+ \hline 
+ F & F & T & F \\ 
+ \hline
+ F & T & F & F \\
+ \hline 
+ F & T & T & F \\ 
+ \hline 
+ T & F & F & F \\ 
+ \hline 
+ T & F & T & F \\ 
+ \hline 
+ T & T & F & F \\ 
+ \hline 
+ T & T & T & T \\ 
+ \hline 
+\end{tabular}
+\end{center}
+
+c. $(p \land q \land r) \lor (\neg\; p \land \neg\; q \land \neg\; r)$
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+ \hline
+ $p$ & $q$ & $r$ & $(p \land q \land r) \lor (\neg\; p \land \neg\; q \land \neg\; r)$\\ 
+ \hline
+ F & F & F & T \\ 
+ \hline 
+ F & F & T & F \\ 
+ \hline
+ F & T & F & F \\
+ \hline 
+ F & T & T & F \\ 
+ \hline 
+ T & F & F & F \\ 
+ \hline 
+ T & F & T & F \\ 
+ \hline 
+ T & T & F & F \\ 
+ \hline 
+ T & T & T & T \\ 
+ \hline 
+\end{tabular}
+\end{center}
+
+\end{proof}
+
+\begin{exercise}{19}
+Below are the following parts. \\ \\
+a. Which of $\{p = T, q = T\}$, $\{p \land q = T\}$, $\{q = F\}$, $\{ \}$, and $\{r = T, r = F\}$ are well-formed? \\ 
+b. Of the ones that are well-formed, which ones are proper for $(T \rightarrow F)$, $(p \land \neg \neg\; p)$, and $((p \lor q \lor \neg\; p) \leftrightarrow q)$?
+\end{exercise}
+
+\begin{proof}
+Below are the both of the problems. \\ \\
+a. Well Formed: $\{ p = T, q = T\}$, $\{p \land q = T\}$, $\{q = F\}$, $\{ \}$ \\ 
+Ill Formed: $\{ r = T, r = F\}$ This is ill formed due to r having multiple bindings. \\ \\
+b. The follow are what I think would be able to be in  each case. \\ 
+$(T \rightarrow F)$ == $\{ q = F\}$ \\
+$(\p \land \neg \neg p)$ == $\{ p = T, q = T \}$, $\{p \land q = T \}$ \\
+$((p \lor q \lor \neg\; p) \leftrightarrow q)$ == $\{ p = T, q = T\}$, $\{ p \land q = T\}$
+
+\end{proof}
+
+\begin{exercise}{20}
+List all the state $\sigma \models p \leftrightarrow (q \leftrightarrow r)$.
+\end{exercise}
+
+\begin{proof}
+All of the following states satisfy $\sigma \models p \leftrightarrow (q \leftrightarrow r)$. \\ \\
+$\{p = F, q = F, r = T\}$, $\{p = F, q = T, r = F\}$, $\{p = T, q = F, r = F\}, \{p = T, q = T, r = T\}$ \\ \\ 
+A note to add is that you can rearrange $p, q, r$ in any order to make other sets that will still satisfy $\sigma \models p \leftrightarrow (q \leftrightarrow r)$
+
+\end{proof}
+
+\begin{exercise}{21}
+Are there any $\sigma$ such that $\sigma \models T \rightarrow F$? Does this tell us that $\varnothing \models T \rightarrow F$?
+\end{exercise}
+
+\begin{proof}
+Yes there is, $\varnothing \models T \rightarrow F$. This is due to the fact that the proposition doesn't contain any variables, just the constants $T$ and $F$. 
+
+\end{proof}
+
+\begin{exercise}{22}
+Answer the following parts. \\ \\
+a. Define $\nLeftrightarrow$ using $\models$. \\ 
+b. Give a small example that proves that $\nLeftrightarrow$ is not transitive. 
+\end{exercise}
+
+\begin{proof}
+Below are the two parts. \\ \\
+a. Two proposition $p$ and $q$ are logically not equivalently written as $p \nLeftrightarrow q$ if $\models \neg\; (p \leftrightarrow q)$. To explicatly note, that $\models T \leftrightarrow F$; $\models F \leftrightarrow T$; $\models \neg\; (T \leftrightarrow T)$; $\models \neg\; (F \leftrightarrow F)$. In essence $p$ and $q$ are not logically equivalent if they have a mix of columns in their truth tables. \\ \\
+b. $p \nLeftrightarrow q$ and $q \nLeftrightarrow r$ but it is not necessarily true that $p \nLeftrightarrow r$.
+
+\end{proof}
+
+\end{document}
