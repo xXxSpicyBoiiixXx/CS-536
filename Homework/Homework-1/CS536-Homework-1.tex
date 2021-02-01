@@ -1,0 +1,209 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{Homework 1}
+\author{Md Ali A20439433 \\ 
+Samantha Berg A20456450 \\ 
+Sourav Yadav A20450418 \\ \\
+CS 536: Science of Programming} 
+\date{January 31, 2021}
+
+\maketitle
+ 
+\begin{exercise}{1}
+What is the full parenthesization of the following \\ \\
+a. $p \land \neg\: r \land s \rightarrow \neg\: q \lor r \rightarrow \neg\: p \leftrightarrow \neg\: s \rightarrow t$? \\ \\
+b. $\exists\: m.0 \leq m < n \land \forall\: j. 0 \leq j < m \rightarrow b[0] \leq b[j] \leq b[m]$ 
+\end{exercise} 
+
+\begin{proof}
+To avoid multiple correct answer we will make the following assuming that $\land, \lor$ will be left associative and $\rightarrow, \leftrightarrow$ will be right associative. The full parenthesization are below:\\ \\ 
+a. $((((((p \land \neg\: r) \land s) \rightarrow ((((\neg\: q \lor r)) \rightarrow ((\neg\: p)) \leftrightarrow (\neg\: s))) \rightarrow t))))$ \\ \\
+b. $(\exists\: m.((0 \leq m < n) \land ((\forall\: j.(0 \leq j < m))) \rightarrow ((((b[0]) \leq b[j]) \leq b[m]))))$ 
+
+\end{proof}
+
+\begin{exercise}{2}
+Give the minimal parenthesization of each of the following by showing what remains after removing all redundant parentheses. \\ \\
+a. $(( \neg\: (p \lor q) \lor r) \rightarrow ((( \neg\: q) \lor r) \rightarrow ((p \lor (\neg\: r)) \lor (q \land s))))$\\ \\ 
+b. $(\exists\: i.(((0 \leq i) \land (i < m)) \land (\forall\: j. (((m \leq j) \land (j < n)) \rightarrow (b[i] = b[j])))))$\\ \\
+c. $(\forall\: x.(( \exists\: y.(p \rightarrow q)) \rightarrow (\forall\: z.(q \lor (r \land s)))))$
+\end{exercise}
+ 
+\begin{proof}
+The minimal parenthesization are below: \\ \\
+a. $\neg\: (p \lor q) \lor r \rightarrow  \neg\: q \lor r \rightarrow (p \lor \neg\: r) \lor (q \land s)$\\ \\ 
+b. $\exists\: i.0 \leq i \land i < m \land \forall\: j. m \leq j \land j < n \rightarrow b[i] = b[j]$\\ \\
+c. $\forall\: x. \exists\: y.p \rightarrow q \rightarrow \forall\: z.q \lor (r \land s)))))$
+\end{proof}
+
+\begin{exercise}{3}
+For the following, say whether the given propositions or predicates are $\equiv$ or $\not\equiv$ with justifications. \\ \\
+a. Is $p \land q \lor \neg\: r \rightarrow \neg\: p \rightarrow q \equiv (( p \land q) \lor ((\neg\: r \rightarrow (( \neg\: p) \rightarrow (( \neg\: p) \rightarrow q)))))$ \\ \\
+b. Is $\forall\: x.p \rightarrow \exists\: y.q \rightarrow r \equiv (( \forall\: x.p) \rightarrow (\exists\: y.q)) \rightarrow r$
+\end{exercise}
+
+\begin{proof}
+Below are the following validation and answers to each.
+\\ \\
+a. For this we will minimize the parentheses as much as possible on the right hand side. Doing so we come to the conclusion that
+\begin{equation}
+    p \land q \lor \neg\: r \rightarrow \neg\: p \rightarrow q \not\equiv (( p \land q) \lor ((\neg\: r \rightarrow (( \neg\: p) \rightarrow (( \neg\: p) \rightarrow q)))))
+\end{equation}
+As we can see above in equation 1 that this equation is not syntactically equal due to not being able to completely minimize the parentheses completely where we will have to operate on them first before any other operation can take place. However, this equation is semantically equal and this can be thoroughly checked by a truth table. \\ \\
+b. We will again minimize the parentheses as much as possible on the right hand side. Doing so, we come to the conclusion that
+\begin{equation}
+    \forall\: x.p \rightarrow \exists\: y.q \rightarrow r \equiv \forall\: x.p \rightarrow \exists\: y.q \rightarrow r
+\end{equation}
+Doing so, we can see in equation 2 that we have constructed that this is both syntactically and semantically equal as this has the same order of operations on both sides.
+
+\end{proof}
+ 
+\begin{exercise}{4} Say weather each of the following is a tautology, contradiction, or contingency. If it's a contingency, show an instance when the proposition is true and show an instance where it's false. \\ \\
+a. $(p \rightarrow (q \rightarrow r)) \leftrightarrow ((p \rightarrow q) \rightarrow r)$ \\ \\
+b. $(\forall\: x \in \mathbb{Z}. \forall\: y \in \mathbb{Z}.f(x,y) > 0) \rightarrow (\exists\: x \in \mathbb{Z}. \exists\: y \in \mathbb{Z}. f(x,y) > 0)$
+\end{exercise}
+
+\begin{proof}
+Below are the corresponding solutions to the exercise above. \\ \\
+a. We have that 
+\begin{equation}
+    (p \rightarrow (q \rightarrow r)) \leftrightarrow ((p \rightarrow q) \rightarrow r)
+\end{equation}
+For equation 3 this is a contingency and we have constructed the truth table below to show all possible out comes of this contingency.
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+ \hline
+ $p$ & $q$ & $r$ & $(p \rightarrow (q \rightarrow r)) \leftrightarrow ((p \rightarrow q) \rightarrow r)$\\ 
+ \hline
+ F & F & F & F \\ 
+ \hline 
+ F & F & T & T \\ 
+ \hline
+ F & T & F & F \\
+ \hline 
+ F & T & T & T \\ 
+ \hline 
+ T & F & F & T \\ 
+ \hline 
+ T & F & T & T \\ 
+ \hline 
+ T & T & F & T \\ 
+ \hline 
+ T & T & T & T \\ 
+ \hline 
+\end{tabular}
+\end{center}
+\bigskip 
+b. $(\forall\: x \in \mathbb{Z}. \forall\: y \in \mathbb{Z}.f(x,y) > 0) \rightarrow (\exists\: x \in \mathbb{Z}. \exists\: y \in \mathbb{Z}. f(x,y) > 0)$ is a tautology. If $f(x,y) > 0 $ for all integers x and y, then any two integers prove the existential. This can be seen if we take that $x = 0$ and $y = 0$, will make $f(0,0) > 0$, there exists $x$ and $y$ with $f(x,y) > 0$
+
+ \end{proof}
+
+\begin{exercise}{5}
+Which of the following mean $p \rightarrow q$ and which mean $q \rightarrow p$? \\ \\
+a. $p$ is sufficient for $q$ \\ \\
+b. $p$ only if $q$ \\ \\
+c. $p$ if $q$ \\ \\
+d. $p$ is necessary for $q$
+\end{exercise}
+
+\begin{proof} 
+Below are the following mathematical notion for each phrase. \\ \\
+a. $p \rightarrow q$ \\ \\
+b. $p \rightarrow q$ \\ \\
+c. $q \rightarrow p$ \\ \\
+d. $q \rightarrow p$ 
+
+\end{proof}
+
+\begin{exercise}{6}
+Let $e_{1}$ and $e_{2}$ be expressions. \\ \\
+a. In general does $e_{1} \neq e_{2}$ imply $e_{1} \not\equiv e_{2}$? If yes, briefly justify; if no, give a counterexample. \\ \\
+b. In general, does $e_{1} = e_{2}$ imply $e_{1} \equiv e_{2}$? Again give a brief justification or counterexample.
+\end{exercise}
+
+\begin{proof}
+Below are the both the parts to this exercise. \\ \\
+a. This is true as if we take the property that $\equiv$ implies $=$ is true, then we can take the contrapostive of this and reach our conclusion that $\neq$ implies $\not\equiv$ hence by definition, we can see that $e_{1} \neq e_{2}$ imply $e_{1} \not\equiv e_{2}$. \\ \\
+b. There are many counterexamples but we will utilize the one below
+\begin{align}
+    \text{Take } n \in \textbb{Z} \text{ and } e_{1} = n + 0;\: e_{2} = n
+\end{align}
+So following the conditions stated in equation 4, we can see that $e_{1} = e_{2}$ but $e_{1} \equiv e_{2}$. Meaning that $e_{1} = e_{2}$ does not imply $e_{1} \equiv e_{2}$, hence result.
+
+\end{proof}
+
+\begin{exercise}{7}
+Show that $p \land \neg\: (q \land r) \rightarrow q \land r \rightarrow \neg\: p$ is a tautology by proving that it is $\Leftrightarrow T$. 
+\end{exercise}
+
+\begin{proof} 
+Below is the proof that $p \land \neg\: (q \land r) \rightarrow q \land r \rightarrow \neg\: p$ is a tautology. \\ \\
+    $p \land \neg\: (q \land r) \rightarrow q \land r \rightarrow \neg\: p \Leftrightarrow T$ \hfill \\ \\
+    $\Leftrightarrow p \land \neg\: (q \land r) \rightarrow (\neg\: (q \land r) \lor \neg\: p)$ \hfill Definition of $\rightarrow$ \\ \\ 
+    $\Leftrightarrow \neg\: (p \land (\neg\: q \land r)) \lor (\neg\: (q \land r) \lor \neg\: p)$ \hfill Definition of $\rightarrow$ \\ \\ 
+    $\Leftrightarrow \neg\: (p \land (\neg\: q \lor \neg\: r)) \lor ((\neg\: q \lor \neg\: r) \lor \neg\: p)$ \hfill De Morgan's Law \\ \\
+    $\Leftrightarrow \neg\: ((p \land \neg\: q) \lor (p \land \neg\: r)) \lor ((\neg\: q \lor \neg\: r) \lor \neg\: p)$ \hfill Distributing \\ \\
+    $\Leftrightarrow (\neg\: (p \land \neg\: q) \land \neg\:(p \land \neg\: r)) \lor ((\neg\: q \lor \neg r) \lor \neg\: p)$ \hfill De Morgan's Law \\ \\
+    $\Leftrightarrow ((\neg\: p \lor \neg\neg\: q) \land (\neg\: p \lor \neg\neg\: r)) \lor ((\neg\: q \lor \neg\: r) \lor \neg\: p)$ \hfill Double Negation \\ \\ 
+    $\Leftrightarrow ((\neg\: p \lor q) \land (\neg\: p \lor r)) \lor (\neg\: q \lor \neg\: r \lor \neg\: p)$ \hfill Distributing \\ \\ 
+    $\Leftrightarrow (\neg\: p \lor q \lor \neg\: q \lor \neg\: r \lor \neg\: p) \land (\neg\: p \lor r \lor \neg\: q \lor \neg\: r \lor \neg\: p)$ \hfill Excluded Middle \\ \\ 
+    $\Leftrightarrow (\neg\: p \lor T \lor \neg\: r \lor \neg\: p) \land (\neg\: p \lor \neg\: q \lor T \lor \neg\: p)$ \hfill Domination with both T's \\ \\
+    $\Leftrightarrow T \land T$ \hfill Both are T's \\ \\
+    $\Leftrightarrow T$ \hfill Q.E.D. \\ \\
+    Hence from the above proof we can see that we can see that $p \land \neg\: (q \land r) \rightarrow q \land r \rightarrow \neg\: p$ is indeed a tautology, hence result. 
+    
+\end{proof}
+
+\begin{exercise}{8}
+Simplify $\neg\: (\forall\: x.(\exists\: y. x \leq y) \lor \exists\: z. x \geq z)$ to a predicate that has no use of $\neg$. Present a proof of equivalence. 
+\end{exercise}
+
+\begin{proof}
+Below is the equivalence of $\neg\: (\forall\: x.(\exists\: y. x \leq y) \lor \exists\: z. x \geq z$ with no $\neg$ signs. \\ \\ 
+$\neg\: (\forall\: x.(\exists\: y. x \leq y) \lor \exists\: z. x \geq z)$ \\ \\ 
+$\Leftrightarrow (\neg\: \forall\: x.(\exists\: y. x \leq y) \land (\neg\: \exists\: z. x \geq z)$ \hfill De Morgan's Law \\ \\
+$\Leftrightarrow (\neg\: \forall\: x.\exists\: y. x \leq y \land (\neg\: \exists\: z. x \geq z)$ \hfill Minimizing Parentheses \\ \\ 
+$\Leftrightarrow \exists\: x. \forall\: y. x > y \land \forall\: z. x < z$ \hfill Negation of Comparisons \\ \\ 
+Hecne from the above proof, we can see the equivalence of $\neg\: (\forall\: x.(\exists\: y. x \leq y) \lor \exists\: z. x \geq z$ with no $\neg$ sings is, $\exists\: x. \forall\: y. x > y \land \forall\: z. x < z$, hence result.
+
+\end{proof}
+
+\begin{exercise}{9}
+Write the definition of a predicate function $GT(b,x,m,k)$ that yields true if and only if $x > b[m],...,b[m+k-1]$. Assume that all the indexes $m,...,m+k-1$ are all in range. If $k \leq 0$, the sequence $b[m],b[m+1],...,b[m+k-1]$ is empty and $GT(b,x,m,k)$ is true.
+\end{exercise}
+
+\begin{proof}
+The definition can be expressed as a for loop and some conditional statements as we have a set parameters that we can input into our function $GT$ e.g. $b,x,m,k$.  We also know that if the value $k \leq 0$ than the sequence will be empty making our function $GT$ true. Let's construct our loop and conditional statements for this particular function. \\ \\
+if $k \leq 0$ return true \\ \\
+else for $i = m$ to $m + k - 1$ \\ 
+if $x < b[i]$ return false \\ \\ 
+return true \\ \\
+As we can see from above the function will be passed in parameters where it will first check if the $k$ parameter will meet the definition of being an empty making the function true. If the $k$ value is greater than $0$ it will then go through the for loop and check if the $x$ value will be less than all the indexes presented. If the loop finds one element in the given parameter to make it great than $x$, then the loop will return false, otherwise it will scan the given parameter index values and then return true, hence result
+
+\end{proof}
+
+
+\end{document}
