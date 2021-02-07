@@ -1,0 +1,151 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{Homework 2}
+\author{Md Ali A20439433 \\ 
+CS 536: Science of Programming} 
+\date{February 1, 2021}
+
+\maketitle
+ 
+\begin{exercise}{1}
+For each of the following, is the expressions legal or illegal according to the syntax we're using. If illegal, why? If legal, what is the type of the resulting expression? \\ \\ 
+a. $(x < y$ ? $x : F)$ \\ \\ 
+b. $b[0] + b[1][1]$ \\ \\
+c. $match(b1,b2,n)$
+\end{exercise} 
+
+\begin{proof}
+Below are the following expressions that are defined either legal or illegal with their corresponding reasoning. \\ \\
+a. We will be assuming that $x,y \in \mathbb{Z}$, stating this assertion, the expression is automatically illegal due to the fact that the variable $x$ and the constant Boolean $F$ are of different types. \\ \\
+b. We are assuming that $b$ is a two-dimensional array of primitive type e.g. integers, Boolean, characters, strings, and floating-point numbers. Stating this assertion, the expression becomes illegal due to the fact that the object $b[0]$ will yield a one-dimensional array, as stated we simply are not allowed take a slice of any multi-dimensional array, hence the expression is ultimately illegal. \\ \\ 
+c. We are assuming that $b1$ and $b2$ are one-dimensional arrays of primitive type. We will also assume that $n \in \mathbb{N}_{0}$, since $n \not < 0$. If $n < 0$ then we will encounter a run time error, due to the fact it will be indexing an illegal area of an array. In addition, we can also receive a run time error if $n > size(b1)$ or $n > size(b2)$ due to the same reasoning of indexing an illegal area of an array. Unfortunately, due to the assertion that $b1$ and $b2$ are one-dimensional arrays of primitive types, we can say that arrays make the expression illegal. This is due to the fact that the expression did not explicitly showcased $b1$ as $b1[\text{Some Array Value}]$ and $b2[\text{Some Array Value}]$. \\ \\
+\end{proof}
+
+\begin{exercise}{2}
+For each of the following are well-formed states? For the ones that aren't, why? \\ \\
+a. $\{ x = (2), y = (4)\}$ \\ \\
+b. $\{ u = (3,4), v = 0, w = u[1]\}$ \\ \\
+c. $\{r =$ one, $s =$ four, $t = r + s\}$
+\end{exercise}
+ 
+\begin{proof}
+As a reminder, a well-formed state say $\sigma$ is a set of pairs of a proposition letter and a truth value where there's only one binding for any given variable. If a set of bindings $\sigma$ has more than one binding for some variable, we will note that it is an ill-formed state. It is important to note, in the terms of arrays, the value of a single array indexing expression within a state is written as $\sigma(b[e]) = \beta(\alpha)$ where $\beta = \sigma(b)$ and $\alpha = \sigma(e)$. The variable $b$ is an array of primitive type, so $\sigma(b) = $ a function we're calling $\beta$. We then call $\beta$ on the value of the index expression $e$, hence $\alpha = \sigma(e)$, and the value $\beta(\alpha)$ is the meaning of $b[e]$. \\ \\
+a. This state is well-formed by definition. \\ \\ 
+b. This state is well-formed by definition. \\ \\ 
+c. This state is ill-formed due to the fact that the variable $r$ and $s$ are semantic values while being operated on a syntactical operation in the expression $t = r + s$. Hence, due to the mixing of semantic variables with a syntactical operation makes the state ill-formed. \\ \\
+\end{proof}
+
+\begin{exercise}{3}
+Let $\sigma = \{ x = 2, b = \beta \}$ where $\beta =$ (five, two plus two, 6). \\ \\ 
+a. Rewrite $\sigma$ giving the value of $b$ as a set of ordered pairs. \\ \\
+b. Rewrite $\sigma$ giving the value of $b$ as separate bindings for $b[0], b[1], etc.$ 
+\end{exercise}
+
+\begin{proof}
+Below are both parts of exercise 3. \\ \\ 
+a. $\sigma = \{x = 2, b = \beta\}$, where $\beta = \{(0, \text{five}), (1, \text{one plus one}), (2, 6)\}$ \\ \\ 
+b. Here we will write two equivalent statements that are both correct for separate bindings \\
+$\sigma = \{x = 2, b[0] = \text{five}, b[1] = \text{one plus one}, b[2] = 6\} = \{(x,2), (b[0],\text{five}),(b[1],\text{one plus one}),(b[2],6)\}$ \\ \\
+\end{proof}
+ 
+\begin{exercise}{4}
+Let $\varphi = x = y \cdot z \land y = 3 \cdot z \land z = b[0] + b[2] \land 3 < b[1] < b[2] < 6$. Complete a definition such that $\sigma \models \varphi$, where $z = 5$
+\end{exercise}
+
+\begin{proof}
+We will assume that $x, y \in \mathbb{Z}$ and the array $b$ contains only the primitive type integers. \\ \\ 
+Taking the expression to the farthest right we can see that $3 < b[1] < b[2] < 6$, as we note the only two integers that are between $3$ and $6$ are $4$ and $5$. Since $b[1] < b[2]$ we can conclude that $b[1] = 4$ and $b[2] = 5$. \\ \\ 
+Moving to the second expression from the right, we can note that $z = b[0] + b[2]$, since we were given $z$ and we found $b[2]$, we can simply input the values as $5 = b[0] + 5$, which makes the value for $b[0] = 0$. \\ \\ 
+Looking at the third expression from the right, we can see that $y = 3 \cdot z$, we can simply plug the value for $z$ and we get that $y = 3 \cdot 5 = 15$. \\ \\ Lastly, we can take our last expression where $\x = y \cdot z$, we simply plug in our values that we have for $y$ and $z$ which we get that $x = 15 \cdot 5 = 75$ \\ \\
+In conclusion for $\sigma \models \varphi$, where $z = 5$ to be true, the following values will be needed \\ \\ 
+$x = 75$ \\
+$y = 15$ \\ 
+$z = 5$ \\
+$b = (0,4,5)$ \\ \\
+\end{proof}
+
+\begin{exercise}{5}
+Take the expression $0 \cdot b[b[j]]$. For each state below, is it well-formed and proper for the expression? And if so, does the expression terminate correctly and with what result? If not, why? \\ \\ 
+a. $\{j = 0, b = (3,2,5,4), c = (3), d=8\}$ \\ \\ 
+b. $\varnothing$ \\ \\
+c. $\{ j = 0, b = 0\}$
+\end{exercise}
+
+\begin{proof} 
+Noting the definition of well-formed state from exercise two and that a proper state is defined as a mapping that assigns to every simple and array variable of type $T$ a value in the domain $\mathcal{D}_{T}$. We use the letter $\Sigma$ to denote a the set of proper states. \\ \\ 
+a. The state is well-formed and proper, the extra bindings of $c$ and $d$ are no problem. The expression terminates correctly with a corresponding result of $0$. \\ \\
+b. The null state is well-formed but improper for the expression $0 \cdot b[b[j]]$. This is due to the fact that the null set does not contain a binding for $b$ or $j$. \\ \\ 
+c. The state is well-formed but improper for the expression $0 \cdot b[b[j]]$. This is due to the face that the value $b$ can't be of integer type. \\ \\
+\end{proof}
+
+\begin{exercise}{6}
+Let $\sigma = \{x = 2, y = 4, b = (-1, 0, 4, 2)\}$ \\ \\ 
+a. Is there a difference between $\sigma [z \mapsto 1]$ and $\sigma \cup \{(z, 1)\}$ Justify your answer. \\ \\ 
+b. Repeat, on $\sigma [x \mapsto 5]$ and $\sigma \cup \{(x, 5)\}$?
+\end{exercise}
+
+\begin{proof}
+The following two parts are below. \\ \\
+a. There is no difference due to the fact that $z$ has no binding in the state $\sigma$, meaning that $\sigma [z \mapsto 1]$ and $\sigma \cup \{(z, 1)\}$ are the same. In other words, it's like $\sigma$ but it has been extended with $z = 1$. \\ \\ 
+b. There is a difference between in $\sigma [x \mapsto 5]$ and $\sigma \cup \{(x, 5)\}$, as $x$ already contains a binding in $\sigma$. For mathematical purposes, $\sigma [x \mapsto 5]$ is equivalent to $\sigma_{0} \cup \{(x,5)\}$ where $\sigma_{0}$ is the remaining part (excluding the original $x$) of $sigma$. If we take a look at $\sigma \cup \{(x,5)\}$, this will ultimately constitute that $x$ has two bindings e.g. $x = 2$ and $x = 5$. Hence, $\sigma [x \mapsto 5]$ and $\sigma \cup \{(x, 5)\}$ are indeed different. \\ \\
+\end{proof}
+
+\begin{exercise}{7}
+Recall how satisfaction of quantified predicates and state updates are defined. \\ \\
+a. Does $\{x = 4, y = 6, b = (4,2,8)\} \models (\exists\: x. \exists\: j. b[j] < x < y)$? If not, why? \\ \\ 
+b. Does $\{x = 0, y = 7, b = (4,2,8)\} \models (\forall\: x. \forall\: k. 0 < k < 3 \rightarrow x < b[k])$? If not, why? 
+\end{exercise}
+
+\begin{proof}
+Below are the two parts to this exercise \\ \\
+a. The state $\{x = 4, y = 6, b = (4,2,8)\}$ does not satisfy the expression $(\exists\: x. \exists\: j. b[j] < x < y)$. This is due to the fact that the state has no bindings for $j$ and the expression has no definition for the variable $j$ either. \\ \\ 
+b. The state $\{x = 0, y = 7, b = (4,2,8)\}$ does satisfy the expression $(\forall\: x. \forall\: k. 0 < k < 3 \rightarrow x < b[k])$ as for $\forall\: k$ in $0 < k < 3$, the statement for $\forall\: x$ such that $x < b[k]$ holds true. \\ \\
+\end{proof}
+
+\begin{exercise}{8}
+In English, explain briefly when each of the following holds. \\ \\
+a. $\not\models ( \forall\: x \in U. (\exists y \in V. P(x,y)))$ \\ \\ 
+b. $\not\models \forall\: y. ((\exists x \in U. P(x,y)) \rightarrow (\exists y \in U. Q(x,y)))$
+\end{exercise}
+
+\begin{proof}
+For the following, we will use the arbitrary state $\sigma$ \\ \\
+a. The state $\sigma$ does not satisfy the expression where for all of $x$ in the set $U$ there exists a variable $y$ in the set $V$ where the arguments satisfy the function $P(x,y)$ \\ \\ 
+b. The state $\sigma$ does not satisfy the expression where for all of $y$ there exists an $x$ in the set $U$ where if the function $P(x,y)$ is satisfied there exists a $y$ in the set $U$ such that the function $Q(x,y)$ is satisfied. \\ \\ 
+\end{proof}
+
+\begin{exercise}{9}
+Write a definition for a predicate function $P(b, c, d, s, t) = ...$ such that every element in $b[c], b[c+1],...,b[d-1]$ equals some element in $b[s], b[s+1],...,b[t-1]$. If any of $c,d,s,t$ are illegal as indexes for $b$, have $P$ return false.
+\end{exercise}
+
+\begin{proof}
+Below is the predicate function. \\ \\
+$P(b,c,d,s,t) = 0 < size(b) \land \forall\: x(0 \leq x \leq x < d \leq size(b)) \exists\: y(0 \leq s \leq y < t \leq size(b) \rightarrow b[x] = b[y]$
+
+\end{proof}
+
+
+\end{document}
