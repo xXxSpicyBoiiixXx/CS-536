@@ -1,0 +1,187 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{Homework 6}
+\author{Md Ali A20439433 \\ 
+CS 536: Science of Programming} 
+\date{March 5, 2021}
+
+\maketitle
+ 
+\begin{exercise}{1}
+For non-deterministic if, say $IF_{N} \equiv\: if\: B_{1} \rightarrow S_{1}\: \square\: B_{2} \rightarrow S_{2}\: fi$, then $wp(IF_{N}, q) \equiv (B_{1} \rightarrow wp(S_{1}, q)) \land (B_{2} \rightarrow wp(S_{2}, q))$. Is it also the case $wp(IF_{N}, q) \Leftrightarrow (B_{1} \land\: wp(S_{1}, q)) \lor (B_{2} \land\: wp(S_{2}, q))$? Explain briefly.  
+\end{exercise} 
+
+\begin{proof}
+No, this is due to the fact that the expression $wp(IF_{N}, q) \Leftrightarrow (B_{1} \land\: wp(S_{1}, q)) \lor (B_{2} \land\: wp(S_{2}, q))$ allows for the possibility that $B_{1}$ and $B_{2}$ to be both true while only one of either $wp(S_{1}, q)$ or $wp(S_{2}, q)$ to be true. If we took that $B_{1}$ and $B_{2}$ to be both true, and then consider either $S_{1}$ or $S_{2}$ to be able to run we still would need the equivalent expression of $B_{1} \land B_{2} \rightarrow wp(S_{1}, q) \land wp(S_{2},q)$. This further proves that we would need both $wp(S_{1}, q)$ and $wp(S_{2}, q)$ to be true and not only one of them. Hence result.
+
+\end{proof}
+
+\begin{exercise}{2}
+Calculate the $wp$ for $wp(m := m + f(m,y), f(m,y) < g(y,m))$
+\end{exercise}
+ 
+\begin{proof}
+Below is the calculation for $wp$ 
+\begin{gather*}
+    wp(m : = m + f(m,y), f(m,y) < g(y,m)) \\
+    \equiv f(m + f(m,y),y) < g(y, m + f(m,y))
+\end{gather*}
+
+\end{proof}
+
+\begin{exercise}{3}
+Calculate the $wp$ for $wp(u := u*k; k:=u, u > h(k))$
+\end{exercise}
+
+\begin{proof}
+Below is the calculation for $wp$
+\begin{gather*}
+    wp(u := u*k; k := u, u > h(k)) \\
+    \equiv wp(u := u*k; wp(k := u, u > h(k)) \\ 
+    \equiv wp(u := u*k; u > h(u)) \\ 
+    \equiv u*k > h(u*k)
+\end{gather*}
+
+\end{proof}
+ \newpage 
+\begin{exercise}{4}
+Calculate the $wp$ for $wp(if\: x < 0\: then\: x:= -x\: fi,\: x^{2} \geq x)$
+\end{exercise}
+
+\begin{proof}
+Below is the calculation for $wp$ 
+\begin{gather*}
+    wp(if\: x < 0\: then\: x:= -x\: fi,\: x^{2} \geq x) \\ 
+    \equiv (x < 0 \land wp(x := -x, x^{2} \geq x)) \lor ( x \geq 0 \land (x^{2} \geq x)) \\ 
+    \equiv (x < 0) \lor (x \geq 0) 
+\end{gather*}
+
+Another way to write this is to say that $x \in \mathbb{Z}$, meaning that $x$ is within all integers. 
+
+\end{proof}
+
+\begin{exercise}{5}
+Calculate the $wp$ for $wp(if\: z \geq 0\: then\: x:= x + a/y\: else\: x:= y + b/x\: fi,\: a \leq x < f(x,y))$
+\end{exercise}
+
+\begin{proof}
+Below is the calculation for $wp$
+\begin{gather*}
+    wp(if\: z \geq 0\: then\: x:= x + a/y\: else\: x:= y + b/x\: fi,\: a \leq x < f(x,y)) \\ \\
+    \equiv D(z \geq 0) \land (z \geq 0 \rightarrow wp(x := x + a/y, a \leq x < f(x,y))) \land \\
+    (z < 0 \rightarrow wp(x := y + b/x, a \leq x < f(x,y))) \\ \\
+    \equiv D(z) \land D(0) \land (z \geq 0 \rightarrow wp(x := x + a/y, a \leq x < f(x,y))) \land \\
+    (z < 0 \rightarrow wp(x := y + b/x, a \leq x < f(x,y))) \\ \\
+    \equiv T \land T \land (z \geq 0 \land wp(x := x + a/y, a \leq x < f(x,y))) \lor (z < 0 \land wp(x := x + b/x, a \leq x < f(x,y))) \\ \\ 
+    \equiv (z \geq 0 \land D(x:=x+a/y) \land D(wlp(a \leq x < f(x,y))) \land wlp(a \leq x < f(x,y))) \lor \\ (z < 0 \land D(x:= y + b/x) \land D(wlp(a \leq x < f(x,y))) \land wlp(a \leq x < f(x,y))) \\ \\ 
+    \equiv (z \geq 0 \land y \neq 0 \land D(a \leq x+a/y < f(x+a/y,y)) \land a \leq x + a/y < f(x+a/y,y)) \lor \\ (z < 0 \land x \neq 0 \land D(a \leq y+b/x < f(y+b/x,y))) \land a \leq y+b/x < f(y+b/x,y))) \\ \\ 
+    \equiv (z \geq 0 \land y \neq 0 \land a \leq x+a/y < f(x+a/y,y)) \lor (z < 0 \land x \neq 0 \land a \leq y+b/x < f(y+b/x,y))
+\end{gather*}
+
+\end{proof}
+
+%wp(S,q) == D(wlp(S,q)) and wlp(S,q) and D(S) 
+\begin{exercise}{6}
+Calculate the $wp$ for $wp(x := b[sqrt(y)], x > 0)$
+\end{exercise}
+
+\begin{proof}
+Below is the calculation for $wp$
+\begin{gather*}
+    wp(x := b[sqrt(y)], x > 0) \\
+    \equiv D(wlp(x:=b[sqrt(y)], x >0)) \land wlp(x:=b[sqrt(y)], x  > 0) \land D(x:= b[sqrt(y)]) \\ 
+    \equiv (D(b[sqrt(y)] > 0)) \land (b[sqrt(y)] > 0) \land (0 \leq sqrt(y) < size(b)) \\ 
+    \equiv b[sqrt(y)] > 0 \land b[sqrt(y)] > 0 \land 0 \leq sqrt(y) < size(b) \\ 
+    \equiv 0 < b[sqrt(y)] \land 0 \leq sqrt(y) < size(b)
+\end{gather*}
+
+\end{proof}
+
+\begin{exercise}{7}
+Calculate the $wp$ for $wp(k:= k-b[k], k \neq 0)$
+\end{exercise}
+
+\begin{proof}
+Below is the calculation for $wp$
+\begin{gather*}
+    wp(k:= k-b[k], k \neq 0) \\ 
+    \equiv D(wlp(k:= k-b[k], k \neq 0)) \land wlp(k:= k-b[k], k \neq 0) \land D(k:= k-b[k]) \\ 
+    \equiv D(k-b[k] \neq 0) \land k-b[k] \neq 0 \land 0 \leq k < size(b) \\ 
+    \equiv 0 \leq k < size(b) \land k -b[k] \neq 0 \land 0 \leq k < size(b) \\ 
+    \equiv 0 \leq k < size(b) \land k -b[k] \neq 0
+\end{gather*}
+
+\end{proof}
+
+\begin{exercise}{8}
+From the homework assignment using $p$ calculate the substitution for $p[y*z/y]$
+\end{exercise}
+
+\begin{proof}
+Below the substitution for $p[y*z/y]$
+\begin{gather*}
+    p[y*z/y] \\ 
+    \equiv (x+y < f(a) \lor \exists x .\: x \geq a + y \rightarrow \exists y .\: x*y > b-y-c)[y*z/y] \\ 
+    \equiv x+(y*z) < f(a) \lor \exists x .\: x \geq a+(y*z) \rightarrow \exists y .\: x*y > b - y - c \\ 
+    \equiv x+y*z < f(a) \lor \exists x .\: x \geq a +y*z \rightarrow \exists y .\: x*y > b-y-c
+\end{gather*}
+$y$ is a bounded variable in $\exists y .\: x*y > b-y-c$, but in the rest of the expression $y$ is free, so we were allowed to substitute for all free occurrences of $y$ with $y*z$. In addition, we can remove the parentheses around the substituted variable in  $...x+(y*z) < f(a)...$ and $... \geq a+(y*z)...$ due to the fact that multiplication is higher order of operation than addition in the expression. 
+
+\end{proof}
+
+\begin{exercise}{9}
+From the homework assignment using $p$ calculate the substitution for $p[a-y/a]$
+\end{exercise}
+
+\begin{proof}
+Below is the substitution for $p[a-y/a]$
+\begin{gather*}
+    p[a-y/a] \\ 
+     \equiv (x+y < f(a) \lor \exists x .\: x \geq a + y \rightarrow \exists y .\: x*y > b-y-c)[a-y/a] \\
+     \equiv x+y < f(a-y) \lor \exists x .\: x \geq (a-y)+y \rightarrow \exists y .\: x*y > b-y-c \\ 
+     \equiv x+y < f(a-y) \lor \exists x .\: x \geq a-y+y \rightarrow \exists y .\: x*y > b-y-c
+\end{gather*}
+$a$ is a completely free variable, this makes that for all occurrences of $a$ we are allowed to substitute for it. Hence, all occurrence of the variable $a$ were made with the corresponding substitution of $a-y$. In addition, the parentheses that surrounding $... x \geq (a-y) +y ...$ were removed due to addition and subtraction having the same order of operation and are done left to right. 
+\end{proof}
+
+\newpage 
+\begin{exercise}{10}
+From the homework assignment using $p$ calculate the substitution for $p[x*y/a][y-z/x]$
+\end{exercise}
+
+\begin{proof}
+Below is the substitution for $p[x*y/a][y-z/x]$
+\begin{gather*}
+    p[x*y/a][y-z/x] \\
+  \equiv (x+y < f(a) \lor \exists x .\: x \geq a + y \rightarrow \exists y .\: x*y > b-y-c)[x*y/a][y-z/x] \\ \equiv (x+y < f(x*y) \lor \exists x >\: x \geq (x*y) + y \rightarrow \exists y. \: x*y > b-y-c)[y-z/x] \\ 
+  \equiv (y-z)+y < f((y-z)*y) \lor (\exists x .\: x \geq (x*y) + y)[y-z/x] \rightarrow \exists y .\: (y-z)*y > b-y-c \\ 
+  \equiv y-z+y < f((y-z)*y) \lor \exists x .\: x \geq x*y +y \rightarrow \exists y .\: (y-z)*y > b-y-c
+\end{gather*}
+During the first substitution of the variable $a$, we had that in all occurrences, $a$ was a free variable. Hence we were allowed to substitute it in all instances. For variable $x$ at the beginning of the expression: $(x+y < f(x*y)$, $x$ is indeed free, hence we substitute in the variable. For the middle portion of the expression: $\exists x .\: \geq (x*y) + y$, $x$ is the quantified variable, since all occurrences of $x$ in this case are bounded, hence we are unable to substitute $x$ in this case. In the final part of the expression: $\exists y. \: x*y > b-y-c$, we are allowed to substitute as $x$ is free in this case. Lastly, the corresponding parentheses were removed if the order of operation were greater in each of these expression than what was implemented, if not the parentheses were kept.
+
+\end{proof} 
+
+\end{document}

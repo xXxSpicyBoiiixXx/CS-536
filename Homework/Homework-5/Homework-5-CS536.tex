@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{Homework 5}
+\author{Md Ali A20439433 \\ 
+CS 536: Science of Programming} 
+\date{February 26, 2021}
+
+\maketitle
+ 
+\begin{exercise}{1}
+Study the triple $\{???\}\; x : = b*b - 4 * a * c\; \{0 \leq x \rightarrow sqrt(x) \text{ is defined }\}$. Using backward assignment, what can we use for the precondition of the triple? 
+\end{exercise} 
+
+\begin{proof}
+Using backward assignment, we can have a precondition such as $\{4*a*c \leq b*b \}\; x := b*b - 4*a*c\; \{0 \leq x \rightarrow sqrt(x) \text{ is defined }\}$. Hence result.
+
+\end{proof}
+
+\begin{exercise}{2}
+Study the two triples $\{p\}\; x := n;\; y := m\; \{p \land x = n \land y = m\}$ and $\{1 \leq x * y \leq n * m\} S \{q\}$. Find a predicate $p$ that makes it possible to join the two triples into a sequence. 
+\end{exercise}
+ 
+\begin{proof}
+To combine these two triples, we can have $\{ 1 \leq x*y \} x := n; y := m; S \{q\}$
+
+\end{proof}
+
+\begin{exercise}{3}
+Let $p_{0} \rightarrow p, p \rightarrow p_{1}, q_{0} \rightarrow q,$ and $q \rightarrow q_{1}$ all be valid. From $\{ p \} S \{q\}$, there are four triples of the form $\{p_{i} \} S \{q_{j}\}$ that get by replacing $p$ by $p_{0}$ or $p_{1}$ and $q$ by $q_{0}$ or $q_{1}$. \\ \\ 
+a. If $\sigma \models \{p\} S \{q\}$, which of the four triples $\sigma \models \{p_{i}\} S \{q_{j}\}$ is/are also satisfied by $\sigma$ (under $\models$)? Briefly justify. \\ \\
+b. If $\sigma \models_{tot} \{p\} S \{q\}$, which of the four triples $\sigma \models \{p_{i}\} S \{q_{j}\}$, is/are also satisfied by $\sigma$ (under $\models_{tot}$? Briefly justify.
+\end{exercise}
+
+\begin{proof}
+The two parts are below \\ \\
+a. Satisfying $\sigma$ under $\models$, we can say that $\sigma \models \{p_{0}\}S\{q_{1}\}$ as $p_{0}$ is strengthening the precondition and $\{q_{1}\}$ is weakening the post-condition. \\ \\ 
+b. The same answer can for part a can be used here as the answer is valid for both partial and total correctness. 
+\end{proof}
+ 
+\begin{exercise}{4}
+Say $\sigma \models \{p_{1}\} S \{q_{1}\}$ and $\sigma \models \{p_{2}\} S \{q_{2}\}$. \\ \\ 
+a. Does $\sigma \models \{ p_{1} \land p_{2}\} S \{q_{1} \land q_{2}\}$? Justify briefly. \\ \\ 
+b. Does $\sigma \models \{ p_{1} \lor p_{2}\} S \{q_{1} \land q_{2}\}$? Justify briefly. \\ \\ 
+a. Does $\sigma \models \{ p_{1} \lor p_{2}\} S \{q_{1} \lor q_{2}\}$? Justify briefly. \\ \\ 
+a. Does $\sigma \models \{ p_{1} \land p_{2}\} S \{q_{1} \lor q_{2}\}$? Justify briefly.
+\end{exercise}
+
+\begin{proof}
+All four parts are below. \\ \\ 
+a. This is satisfied because since $\sigma$ satisfies $\{p_{1} \land p_{2}\}S$ which will give us $\{q_{1} \land q_{2}\}$ \\ \\ 
+b. This is not satisfied because we are effectively weakening the precondition. \\ \\ 
+c. This is satisfied due to the fact that both the precondition and post-condition are weakened, but that at least one p is satisfied and one q is also satisfied. \\ \\ 
+d. This is satisfied since the post-condition is weakened. 
+
+\end{proof}
+
+
+\end{document}

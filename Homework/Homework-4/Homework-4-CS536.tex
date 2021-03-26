@@ -1,0 +1,173 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{Homework 4}
+\author{Md Ali A20439433 \\ 
+CS 536: Science of Programming} 
+\date{February 17, 2021}
+
+\maketitle
+ 
+\begin{exercise}{1}
+Let \textit{DO} be the non-deterministic loop \\ 
+\begin{center}
+    $do\: x \neq 0 \rightarrow x := x - 1; y := y + 1; \Box\: x \neq 0 \rightarrow x := x - 1; y := y +2\: od$
+\end{center} 
+a. Let's see what a typical iteration of this loop does over an arbitrary state $\sigma = \{x = \alpha, y = \beta \}$. Assume $\alpha \geq 2$ and calculate the two states we can be in after a single iteration of the loop. e.g. what are $\sigma'$ and $\sigma''$ such that if $\Sigma' = \{\sigma', \sigma''\}$, then $\langle DO, \sigma \rangle \rightarrow^{3} \langle DO, \tau \rangle$ where $\tau \in \Sigma'$? \\ \\
+b. Repeat part (a) but for two iteration to get three possible final states. \\ \\
+c. Generalize parts (a) and (b) to $\kappa$ iterations where $1 < \kappa \leq \alpha$ e.g. what is $\Sigma'$ such that $\langle DO, \sigma \rangle \rightarrow^{3 \cdot \kappa} \langle DO, \tau \rangle$ if and only if $\tau \in \Sigma$?
+\end{exercise} 
+
+\begin{proof}
+Below are all three parts of exercise 1. \\ \\ 
+a. $\sigma' = \{x = \alpha - 1, y = \beta + 1\}$ \\
+$\sigma'' = \{x = \alpha - 1, y = \beta + 2\}$ \\ \\ 
+b. $\sigma' = \{x = \alpha - 2, y = \beta + 2\}$ \\ 
+$\sigma'' = \{x = \alpha - 2, y = \beta + 3 \}$ \\ 
+$\sigma''' = \{x = \alpha - 2, y = \beta + 4 \}$ \\ \\ 
+c. $\{x = \alpha - \kappa, y = \beta + \kappa\},\{x = \alpha - \kappa, y = \beta + \kappa + 1\},...,\{x = \alpha - \kappa, y = \beta + 2 \kappa\}$ \\ \\ 
+\end{proof}
+
+\begin{exercise}{2}
+If $\sigma \models \{p\} S \{q\} \text{ and } \sigma \not\models p, \text{ then } \bot \in M(S, \sigma)$ \_\_\_\_\_ occur.
+\end{exercise}
+ 
+\begin{proof}
+This \textit{\textbf{may or may not}} occur.
+\end{proof}
+
+\begin{exercise}{3}
+If $\sigma \models \{p\} S \{q\} \text{ and } \sigma \not\models p, \text{ then } M(S, \sigma) - \{\bot\} \models q$ \_\_\_\_\_ occur.
+\end{exercise}
+
+\begin{proof}
+This \textit{\textbf{may or may not}} occur.
+\end{proof}
+ 
+\begin{exercise}{4}
+If $\sigma \models \{p\} S \{q\} \text{ and } \sigma \not\models p, \text{ then } \bot \in M(S, \sigma)$ \_\_\_\_\_ occur.
+\end{exercise}
+
+\begin{proof}
+This \textit{\textbf{may or may not}} occur.
+\end{proof}
+
+\begin{exercise}{5}
+If $\sigma \models \{p\} S \{q\} \text{ and } \sigma \models p, \text{ then } M(S, \sigma) - \{\bot\} \models q$ \_\_\_\_\_ occur.
+\end{exercise}
+
+\begin{proof} 
+This \textit{\textbf{must}} occur.
+\end{proof}
+
+\begin{exercise}{6}
+If $\models_{tot} \{p\}S\{q\}$ then $\models_{tot} \{p\}S\{T\}$ \_\_\_\_\_ occur. 
+\end{exercise}
+
+\begin{proof}
+This \textit{\textbf{must}} occur as we can see that $q$ is a tautology making $M(S, \sigma) \models T$ implying that $\bot \not\in M(S, \sigma)$, hence satisfaction of $\sigma \models \{p\}S\{T\}$ requires $S$ to always terminate under $\sigma$. 
+\end{proof}
+
+\begin{exercise}{7}
+If $\models_{tot} \{p\}S\{T\}$ then $\models_{tot} \{p\}S\{q\}$ \_\_\_\_\_ occur.
+\end{exercise}
+
+\begin{proof}
+This \textit{\textbf{must}} occur. This is the same explanation as for exercise 6.
+\end{proof}
+
+\begin{exercise}{8}
+If $\sigma \not\models \{p\}S\{q\}$ and $S$ is deterministic, then $\sigma \models p$ and $\bot \not\in M(S, \sigma)$ and $M(S, \sigma) \models \neg\; q$ \_\_\_\_\_ occur.
+\end{exercise}
+
+\begin{proof}
+This \textit{\textbf{can't}} occur.
+\end{proof}
+
+\begin{exercise}{9}
+If $\bot \not\in M(S, \sigma), M(S, \sigma) \not\models q$, and $S$ is deterministic, then $M(S, \sigma) \models \neg\; q$ \_\_\_\_\_ occur.
+\end{exercise}
+
+\begin{proof}
+This \textit{\textbf{must}} occur.
+\end{proof}
+
+\begin{exercise}{10}
+If $\bot \not\in M(S, \sigma), M(S, \sigma) \not\models q$, and $S$ is non-deterministic, then $M(S, \sigma) \models \neg\; q$ \_\_\_\_\_ occur.
+\end{exercise}
+
+\begin{proof}
+This \textit{\textbf{must}} occur.
+\end{proof}
+
+\begin{exercise}{11}
+If $M(S, \sigma) \not\models q, \tau \in M(S,\sigma)$, and $S$ is non-deterministic, then $\tau \models q$ \_\_\_\_\_ occur. 
+\end{exercise}
+
+\begin{proof}
+This \textit{\textbf{can't}} occur.
+\end{proof}
+
+\begin{exercise}{12}
+If $\sigma \models \{p\}S\{q\}$, then $\sigma \models \{p\}S\{\neg q\}$ \_\_\_\_\_ occur.
+\end{exercise}
+
+\begin{proof}
+This \textit{\textbf{can't}} occur.
+\end{proof}
+
+\begin{exercise}{13}
+If $\sigma \not\models_{tot} \{p\}S\{q\}$ and $S$ is deterministic, then $\sigma \models \{p\}S\{\neg q\}$ \_\_\_\_\_ occur. 
+\end{exercise}
+
+\begin{proof}
+This \textit{\textbf{must}} occur.
+\end{proof}
+
+\begin{exercise}{14}
+If $\sigma \not\models_{tot} \{p\}S\{q\}$ and $S$ is non-deterministic, then $\sigma \models \{p\}S\{\neg q\}$ \_\_\_\_\_ occur. 
+\end{exercise}
+
+\begin{proof}
+This \textit{\textbf{must}} occur.
+\end{proof}
+
+\begin{exercise}{15}
+If $\sigma \not\models \{p\}S\{q\}$ and $S$ is deterministic, then $\sigma \models_{tot} \{p\}S\{\neg q\}$ \_\_\_\_\_ occur. 
+\end{exercise}
+
+\begin{proof}
+This \textit{\textbf{must}} occur.
+\end{proof}
+
+\begin{exercise}{16}
+If $\sigma \not\models \{p\}S\{q\}$ and $S$ is non-deterministic, then $\sigma \models_{tot} \{p\}S\{\neg q\}$ \_\_\_\_\_ occur. 
+\end{exercise}
+
+\begin{proof}
+This \textit{\textbf{may or may not}} occur.
+\end{proof}
+
+\end{document}

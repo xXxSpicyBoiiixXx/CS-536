@@ -1,0 +1,109 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{Homework 7}
+\author{Md Ali A20439433 \\ 
+CS 536: Science of Programming} 
+\date{March 20, 2021}
+
+\maketitle
+ 
+\begin{exercise}{1}
+Give an examples of an $S$ such that $\models \{T\} S \{sp(p,S)\}$ but $\not\models_{tot} \{T\}S\{sp(p,S)\}$
+\end{exercise} 
+
+\begin{proof}
+There are a number of examples that can be used but below are two that are contrary to each other. 
+\begin{gather}
+    while\: x \neq 0\: do\: x := x - 1\: od \\ 
+    while\: x \neq 0\: do\: x := x + 1\: od
+\end{gather}
+Let's take a look at (1) first. We understand that $x \neq 0$, so let's take the case where $x > 0$, we can see in this case that the loop will continuously run until we reach the value zero, where it will not satisfy the loop in this instant and break. Now, let's consider for (1) the case where $x < 0$, here we will encounter a divergent error $(\bot_{d})$, this is because the value $x$ will never reach zero to effectively break out of the loop, hence the error will stand in the case of $x < 0$ due to $\lim_{x \to -\infty}x - 1= -\infty$. \\ \\ 
+Now let's take a look at (2). The same concept applies from (1) but here we are essentially doing the exact opposite by adding one in the case of $x := x + 1$, with this being said, it is understood that $x \neq 0$. Taking a look at the case where $x < 0$, we will obviously reach zero eventually. Taking the case where $x > 0$, in the case of (2), we will encounter a divergent error $(\bot_{d})$ by taking that $x > 0$, we get that $\lim_{x \to +\infty}x + 1= +\infty$ \\
+\end{proof}
+
+\begin{exercise}{2}
+Syntactically calculate $sp(x < y \land x + y \leq n, x := f(x+y); y := g(x*y))$. 
+\end{exercise}
+ 
+\begin{proof}
+\begin{gather*}
+    sp(x < y \land x +y \leq n, x := f(x+y); y := g(x*y)) \\ 
+    \equiv sp(sp(x < y \land x + y \leq n, x := f(x+y)); y := g(x*y)) \\ 
+\end{gather*}
+Let's first consider the inner strong post-condition in this equation.
+\begin{gather*}
+    sp(x < y \land x + y \leq n, x := f(x+y)) \\
+    \equiv (x < y \land x + y \leq n \land x := f(x +y))[x_{0}/x] \\ 
+    \equiv (x < y)[x_{0}/x] \land (x+y \leq n)[x_{0}/x] \land x = f(x+y)[x_{0}/x] \\ 
+    \equiv x_{0} < y \land x_{0} + y \leq n \land x = f(x_{0} + y) 
+\end{gather*}
+Taking this value, we can put it in our original equation as below. 
+\begin{gather*}
+    sp(sp(x < y \land x + y \leq n, x := f(x+y)); y := g(x*y)) \\ 
+    \equiv sp(x_{0} < y \land x_{0} + y \leq n \land x = f(x_{0} + y); y := g(x*y)) \\
+    \equiv (x_{0} < y \land x_{0} + y \leq n \land x = f(x_{0} + y) \land y = g(x*y))[y_{0}/y] \\ 
+    \equiv (x_{0} < y)[y_{0}/y] \land (x_{0} + y \leq n)[y_{0}/y] \land (x = f(x_{0} + y))[y_{0}/y] \land (y = g(x*y))[y_{0}/y] \\ 
+    \equiv x_{0} < y_{0} \land x_{0} + y_{0} \leq n \land x = f(x_{0} + y_{0}) \land g(x * y_{0})
+\end{gather*}
+\end{proof}
+
+\begin{exercise}{3}
+Below, calculate each $sp$ or $wp$ result syntactically. If logical simplification is asked for, complete the syntactic calculation completely first. Below, $even(x) = x\%2 = 0$ and $odd(x) = x\%2 = 1$. 
+\end{exercise}
+
+\begin{proof}
+For each part calculate and follow all directions. \\ \\ 
+a. Calculate and then logically simplify
+\end{proof}
+
+
+\begin{exercise}{4}
+Calculate $p_{1}$, $p_{2}$, and $p_{3}$. In addtion give the names and line references for rules $r_{1}$ and $r_{2}$ in \\ \\ 
+1. 
+\end{exercise}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{exercise}{5}
+Calculate $q_{1}$, $q_{2}$, and rule $r_{1}$ in \\ \\
+\end{exercise}
+
+\begin{proof}
+
+\end{proof}
+
+
+\begin{exercise}{6}
+Let $p_{0} = r = r_{0} \land x = x_{0} \land y = y_{0}$. Calculate $q_{1}, q_{2}, q_{3}, q_{4}, q_{5}$ and rule $r_{1}$ in \\ \\
+\end{exercise}
+
+\begin{proof}
+
+\end{proof}
+
+\end{document}
